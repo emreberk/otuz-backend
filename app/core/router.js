@@ -17,17 +17,17 @@ server.use(restify.fullResponse());
 server.use(restify.bodyParser());
 
 
-//var io = require("socket.io").listen(server);
-//io.sockets.on('connection', function (socket) {
-//    socket.emit('welcome', { orderCount: Math.round(Math.random() * (5 - 0) + 0) });
-//    io.sockets.on("saveOrder", function (deliveryDate, facebookUserId) { 
-//        console.log(deliveryDate + " " + facebookUserId);
-//    });
-//});
+var io = require("socket.io").listen(server);
+io.sockets.on('connection', function (socket) {
+    socket.emit('welcome', { orderCount: Math.round(Math.random() * (5 - 0) + 0) });
+    io.sockets.on("saveOrder", function (deliveryDate, facebookUserId) { 
+        console.log(deliveryDate + " " + facebookUserId);
+    });
+});
 
-//setInterval(function () {
-//    io.emit('online_user', { userCount: Math.round(Math.random() * (3 - 0) + 0) });
-//}, 3000);
+setInterval(function () {
+    io.emit('online_user', { userCount: Math.round(Math.random() * (3 - 0) + 0) });
+}, 3000);
 
 //Get product detail by barcodeNumber
 server.get({ path: "/products/:barcodeNumber" }, controllers.product.getProductByBarcodeNumber)
