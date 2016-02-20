@@ -11,6 +11,7 @@ var objectId = mongoose.Types.ObjectId;
 exports.saveUser = function (req, res, next) {
     var userObject = new user({
         facebookUserId: req.body.facebookUserId,
+        name: req.body.name,
         address: null,
         registeredAt: new Date(),
         products : []
