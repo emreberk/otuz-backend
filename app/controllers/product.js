@@ -18,7 +18,7 @@ exports.saveProduct = function (req, res, next) {
     });
 
     pObject.save(function (err, _product) {
-        if (err) {
+        if (err != null) {
             res.json({ data: null, error: { code: 601, message: "db_failed" } });
         } else {
             res.json({ data: _product, error: null });
@@ -34,7 +34,7 @@ exports.saveProduct = function (req, res, next) {
 exports.getProductByBarcodeNumber = function (req, res) {
     var barcodeNumber = req.params.barcodeNumber;
     product.findOne({ barcodeNumber: barcodeNumber }).exec().then(function (_product) {
-        if (product) {
+        if (product != null) {
             res.json({ data: _product, error: null });
         } else {
             res.json({ data: null, error: { code: 602, message: "not_found" } });

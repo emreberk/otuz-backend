@@ -16,7 +16,7 @@ exports.saveUser = function (req, res, next) {
         if (_user == null) {
            
             var userObject = new user({
-                facebookUserId: req.body.facebookUserId,
+                facebookUserId: facebookUserId,
                 name: req.body.name,
                 address: null,
                 registeredAt: new Date(),
