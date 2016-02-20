@@ -19,8 +19,7 @@ exports.saveProduct = function (req, res, next) {
 
     pObject.save(function (err, _product) {
         if (err) {
-            res.status(500);
-            res.json({ data: null, error: "db_failed" });
+            res.json({ data: null, error: { code: 601, message: "db_failed" } });
         } else {
             res.json({ data: _product, error: null });
         }
@@ -38,8 +37,7 @@ exports.getProductByBarcodeNumber = function (req, res) {
         if (product) {
             res.json({ data: _product, error: null });
         } else {
-            res.status(404);
-            res.json({ data: null, error: "not_found" });
+            res.json({ data: null, error: { code: 602, message: "not_found" } });
         }
     });
 }

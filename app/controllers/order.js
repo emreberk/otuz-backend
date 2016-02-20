@@ -30,15 +30,13 @@ exports.saveOrder = function (req, res, next) {
     }).then(function () {
         
         if (foundUser == undefined) {
-            res.status(404);
-            res.json({ data: null, error: "not_found" });
+            res.json({ data: null, error: { code: 602, message: "not_found" } });
         } else {
             
             var products = foundUser.products.filter(function (p) { return p.quantity > 0 });
             
             if (products.length <= 0) { 
-                res.status(404);
-                res.json({ data: null, error: "no_products" });
+                res.json({ data: null, error: { code: 603, message: "no_products" } });
                 return;
             }
 
@@ -51,8 +49,7 @@ exports.saveOrder = function (req, res, next) {
                 if (_savedOrder != null) {
                     res.json({ data: _savedOrder, error: null });
                 } else { 
-                    res.status(500);
-                    res.json({ data: null, error: "db_failed" });
+                    res.json({ data: null, error: { code: 601, message: "db_failed" } });
                 }
             });
         }

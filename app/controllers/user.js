@@ -18,8 +18,7 @@ exports.saveUser = function (req, res, next) {
     
     userObject.save(function (err, _user) {
         if (err) {
-            res.status(500);
-            res.json({ data: null, error: "db_failed" });
+            res.json({ data: null, error: { code: 601, message: "db_failed" } });
         } else {
             res.json({ data: _user, error: null });
         }
@@ -46,8 +45,7 @@ exports.saveUserProduct = function (req, res, next) {
     }).then(function () {
         
         if (foundProduct == undefined) {
-            res.status(404);
-            res.json({ data: null, error: "not_found" });
+            res.json({ data: null, error: { code: 602, message: "not_found" } });
         } else { 
         
             user.findOne({ facebookUserId: facebookUserId }).exec().then(function (doc) {
@@ -65,14 +63,12 @@ exports.saveUserProduct = function (req, res, next) {
                         if (_savedDoc != null) {
                             res.json({ data: doc, error: null });
                         } else {
-                            res.status(500);
-                            res.json({ data: null, error: "db_failed" });
+                            res.json({ data: null, error: { code: 601, message: "db_failed" } });
                         }
                     });
 
                 } else {
-                    res.status(404);
-                    res.json({ data: null, error: "not_found" });
+                    res.json({ data: null, error: { code: 602, message: "not_found" } });
                 }
             });
         }
@@ -111,8 +107,7 @@ exports.updateUserProduct = function (req, res, next) {
                 }
             }
         }
-        res.status(404);
-        res.json({ data: null, error: "not_found" });
+        res.json({ data: null, error: { code: 602, message: "not_found" } });
     });
 }
 
@@ -130,8 +125,7 @@ exports.updateUserAddress = function (req, res, next) {
             _savedDoc.address = addressModel;
             res.json({ data: _savedDoc, error: null })
         } else {
-            res.status(404);
-            res.json({ data: null, error: "not_found" });
+            res.json({ data: null, error: { code: 602, message: "not_found" } });
         }
     });
 }
@@ -147,8 +141,7 @@ exports.getUserByFacebookUserId = function (req, res) {
         if (_user) {
             res.json({data:_user, error:null});
         } else {
-            res.status(404);
-            res.json({data:null, error: "not_found"});
+            res.json({ data: null, error: { code: 602, message: "not_found" } });
         }
     });
 }
