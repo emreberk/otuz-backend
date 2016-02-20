@@ -37,8 +37,7 @@ server.post("/users/products/:productId", controllers.user.updateUserProduct)
 server.post("/orders", controllers.order.saveOrder)
 
 
-//var port = process.env.PORT || 3000;
-var port = 1850;
+var port = process.env.PORT || 1850;
 server.listen(port, function (err) {
     if (err)
         console.error(err);
