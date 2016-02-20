@@ -14,7 +14,20 @@ fs.readdirSync(controllers_path).forEach(function (file) {
 
 var server = restify.createServer();
 server.use(restify.fullResponse());
-server.use(restify.bodyParser())
+server.use(restify.bodyParser());
+
+
+var io = require("socket.io").listen(server);
+io.sockets.on('connection', function (socket) {
+    socket.emit('welcome', { orderCount: Math.round(Math.random() * (5 - 0) + 0) });
+    io.sockets.on("saveOrder", function (deliveryDate, facebookUserId) { 
+        console.log(deliveryDate + " " + facebookUserId);
+    });
+});
+
+setInterval(function () {
+    io.emit('online_user', { userCount: Math.round(Math.random() * (3 - 0) + 0) });
+}, 3000);
 
 //Get product detail by barcodeNumber
 server.get({ path: "/products/:barcodeNumber" }, controllers.product.getProductByBarcodeNumber)
@@ -32,13 +45,12 @@ server.post("/users/address", controllers.user.updateUserAddress)
 //save User address
 server.post("/users/products/:productId", controllers.user.updateUserProduct)
 
-
 //Save new order
 server.post("/orders", controllers.order.saveOrder)
 
 
 var port = process.env.PORT || 1850;
-server.listen(port, function (err) {
+var app = server.listen(port, function (err) {
     if (err)
         console.error(err);
     else

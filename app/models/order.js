@@ -9,7 +9,8 @@ var orderSchema = new schema({
     orderedAt: Date,
     status:Number,
     user: userModel,
-    products : [productModel]
+    products : [productModel],
+    carId : String
 });
 
 mongoose.model('Order', orderSchema);
