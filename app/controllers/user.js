@@ -109,17 +109,21 @@ exports.updateUserProduct = function (req, res, next) {
                 });
                 if (productFound == true) {
                     user.findOneAndUpdate({ facebookUserId: facebookUserId }, { products : doc.products })
-                    .exec().then(function (_savedDoc) { 
-                    
-                         if (_savedDoc) {
+                    .exec().then(function (_savedDoc) {
+                        
+                        if (_savedDoc) {
                             res.json({ data: doc, error: null });
                             return;
-                        } 
+                        }
                     });
+                } else { 
+                    res.json({ data: null, error: { code: 602, message: "not_found" } });
                 }
             }
+        } else {
+            res.json({ data: null, error: { code: 602, message: "not_found" } });
         }
-        res.json({ data: null, error: { code: 602, message: "not_found" } });
+   
     });
 }
 
