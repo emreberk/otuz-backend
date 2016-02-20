@@ -4,7 +4,6 @@ var schema = mongoose.Schema;
 var userModel = require("./user");
 var productModel = require("./product");
 
-
 var orderSchema = new schema({
     deliveryDate: Date,
     orderedAt: Date,

@@ -6,7 +6,8 @@ var productSchema = new schema({
     photoUrl: String,
     barcodeNumber: String,
     price: Number,
-    quantity:Number 
+    quantity: Number,
+    volume:Number
 });
 
 mongoose.model('Product', productSchema);

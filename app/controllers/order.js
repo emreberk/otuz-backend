@@ -43,6 +43,8 @@ exports.saveOrder = function (req, res, next) {
             orderObject.products = products;
             orderObject.user = foundUser;
             
+            //
+
             //deliver edilebiliyor mu?
             orderObject.save().then(function (_savedOrder) {
             
