@@ -9,21 +9,32 @@ var objectId = mongoose.Types.ObjectId;
 //Method: POST
 //Error: db_failed
 exports.saveUser = function (req, res, next) {
-    var userObject = new user({
-        facebookUserId: req.body.facebookUserId,
-        name: req.body.name,
-        address: null,
-        registeredAt: new Date(),
-        products : []
-    });
     
-    userObject.save(function (err, _user) {
-        if (err) {
-            res.json({ data: null, error: { code: 601, message: "db_failed" } });
+    var facebookUserId = req.body.facebookUserId;
+
+    user.findOne({ facebookUserId: facebookUserId }).exec().then(function (_user) {
+        if (_user == null) {
+           
+            var userObject = new user({
+                facebookUserId: req.body.facebookUserId,
+                name: req.body.name,
+                address: null,
+                registeredAt: new Date(),
+                products : []
+            });
+           
+            userObject.save(function (err, __user) {
+                if (err) {
+                    res.json({ data: null, error: { code: 601, message: "db_failed" } });
+                } else {
+                    res.json({ data: __user, error: null });
+                }
+            });
+
         } else {
             res.json({ data: _user, error: null });
         }
-    })
+    });
 }
 
 
