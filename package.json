@@ -1,0 +1,15 @@
+{
+  "name": "otuzRestApi",
+  "version": "1.0.0",
+	"mongodbUrl": "mongodb://burhan:brhn123456@ds055905.mongolab.com:55905/otuz",
+  "description": "otuzRestApi",
+  "main": "server.js",
+  "author": {
+    "name": "burhan",
+    "email": "burhancetinkayaa@gmail.com"
+  },
+  "dependencies": {
+    "mongoose": "^4.4.4",
+    "restify": "^4.0.4"
+  }
+}
