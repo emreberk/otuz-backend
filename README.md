@@ -3,10 +3,10 @@
 
 This is a nodejs rest api for otuz ios and android apps!
 
-Used npm modules
-mongoose for MONGODB Driver
-restify for REST API Server
-socketio for Web Socket
+Used npm modules <br />
+mongoose for MONGODB Driver <br />
+restify for REST API Server <br />
+socketio for Web Socket <br />
 
 =======================================================================================================================
 
