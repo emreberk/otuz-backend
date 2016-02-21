@@ -29,6 +29,7 @@ setInterval(function () {
     io.emit('online_user', { userCount: Math.round(Math.random() * (3 - 0) + 0) });
 }, 3000);
 
+
 //Get product detail by barcodeNumber
 server.get({ path: "/products/:barcodeNumber" }, controllers.product.getProductByBarcodeNumber)
 //Save product

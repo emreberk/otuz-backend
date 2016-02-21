@@ -1,4 +1,5 @@
-﻿
+﻿/*Mongodb connection layer*/
+
 var mongoose = require('mongoose');
 var fs = require('fs');
 var models_path = process.cwd() + '/app/models';
