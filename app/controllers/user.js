@@ -138,7 +138,12 @@ exports.updateUserAddress = function (req, res, next) {
     
     user.findOneAndUpdate({ facebookUserId: facebookUserId }, { address : addressModel }).exec().then(function (_savedDoc) {
         if (_savedDoc) {
-            _savedDoc.address = addressModel;
+            _savedDoc.address.address = addressModel.address;
+            _savedDoc.address.longitude = addressModel.longitude;
+            _savedDoc.address.latitude = addressModel.latitude;
+            _savedDoc.address.landmark = addressModel.landmark;
+            _savedDoc.address.buildingNumber = addressModel.buildingNumber;
+            _savedDoc.address.doorNumber = addressModel.doorNumber;
             res.json({ data: _savedDoc, error: null })
         } else {
             res.json({ data: null, error: { code: 602, message: "not_found" } });
@@ -155,6 +160,7 @@ exports.getUserByFacebookUserId = function (req, res) {
     var facebookUserId = req.params.facebookUserId;
     user.findOne({ facebookUserId: facebookUserId }).exec().then(function (_user) {
         if (_user) {
+            
             res.json({data:_user, error:null});
         } else {
             res.json({ data: null, error: { code: 602, message: "not_found" } });

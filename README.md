@@ -1,6 +1,11 @@
 ﻿otuz-nodejs-rest-api
 =====================
 
+What's the otuz? Here is the mini slide! <br>
+https://docs.google.com/presentation/d/1xv9ysKusRH0d7L9rqk299URkKqnff08GEbdvAOzRxAI/edit?usp=sharing
+<br>
+<br>
+
 This is a nodejs rest api for otuz ios and android apps!
 
 Used npm modules <br />
